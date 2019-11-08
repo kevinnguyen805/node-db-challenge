@@ -4,6 +4,7 @@ const db = require('./project-model.js')
 
 
 //* RESOURCES */
+// response sends back ID of newly posted resource
 router.post('/resource', (req, res) => {
      const newResource = req.body
      db.postResource(newResource)
@@ -20,6 +21,7 @@ router.get('/resource', (req, res) => {
 
 
 //* PROJECTS */
+// response sends back ID of newly posted project
 router.post('/project', (req, res) => {
      const newProject = req.body
      db.postProject(newProject)
@@ -36,8 +38,10 @@ router.get('/project', (req, res) => {
 
 
 //* TASKS */
-router.post('/task', (req, res) => {
-     const newTask = req.body
+router.post('/project/:id/task', (req, res) => {
+     const {id} = req.params
+     const newTask = {...req.body, project_id: id}
+
      db.postTask(newTask)
      .then(response => {
           res.status(200).json(response)
