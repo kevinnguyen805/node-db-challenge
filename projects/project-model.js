@@ -51,5 +51,5 @@ function getTaskById(id){
      .select('project.name', 'project.description', 'task.description', 'task.notes', 'task.completed')
      .from('project')
      .join('task', 'task.project_id', '=', 'project.id')
-     .where('task.project_id', '=', id)
+     .where('project.id', '=', id)
 }
